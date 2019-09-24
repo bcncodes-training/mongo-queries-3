@@ -2,7 +2,7 @@
 
 Cargar el fichero __social.json__
 
-      mongoimport --uri "mongodb+srv://neollob:<password>@cluster0-pfecj.mongodb.net/social?retryWrites=true&w=majority" --collection social --drop --file /home/dani/Projects/mean-stack3/mongo-queries-3/social.json
+      mongoimport --uri "mongodb+srv://neollob:<password>@cluster0-..." --collection social --drop --file social.json
 
 - Obtener los usuarios que han hecho más comentarios y los que han hecho menos de entre todas las
 entradas de la bd. (tip: usar la cláusula unwind para crear un documento por cada comentario de cada
