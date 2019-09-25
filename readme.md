@@ -13,7 +13,7 @@ Menos comentarios
     db.social.aggregate([
       { $unwind : "$comments" },
       {"$group" : {
-        _id:{user_id:"$by.user_id",name:"$by.name"}, 
+        _id:{name:"$comments.by.name"}, 
         comments:{$sum:1}
       }},
       { "$sort": { 
@@ -27,7 +27,7 @@ Más comentarios
     db.social.aggregate([
       { $unwind : "$comments" },
       {"$group" : {
-        _id:{user_id:"$by.user_id",name:"$by.name"}, 
+        _id:{name:"$comments.by.name"}, 
         comments:{$sum:1}
       }},
       { "$sort": { 
