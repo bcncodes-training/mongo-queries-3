@@ -49,7 +49,7 @@ post (que inicialmente estarían en un array dentro de el post correspondiente).
 
       let paginar=(np,nxp)=>{
         let docs=db.social.find().sort( { index: 1 } ).skip((np-1)*nxp).limit(nxp);
-        docs.forEach((miDoc)=>{print(`titulo:${miDoc._id}| Indice:${miDoc.index}`)})
+        docs.forEach((miDoc)=>{print(`ID:${miDoc._id}| Indice:${miDoc.index}`)})
       }
       paginar(3,10);
         
