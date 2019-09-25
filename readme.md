@@ -34,5 +34,12 @@ Más comentarios
         "name": 1, 
         "comments": -1 
       }},
-      { $limit : 10 }
+      { $group : 
+        {
+          _id:null, name_max:{$first:"$_id"}, 
+          num_max:{$first:"$comments"}, 
+          name_min:{$last:"$_id"},
+          num_min:{$last:"$comments"} 
+        } 
+      }
     ])
