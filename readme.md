@@ -8,42 +8,43 @@ Cargar el fichero __social.json__
 entradas de la bd. (tip: usar la cláusula unwind para crear un documento por cada comentario de cada
 post (que inicialmente estarían en un array dentro de el post correspondiente).
 
-Menos comentarios
+    - Menos comentarios
 
-    db.social.aggregate([
-      { $unwind : "$comments" },
-      {"$group" : {
-        _id:{name:"$comments.by.name"}, 
-        comments:{$sum:1}
-      }},
-      { "$sort": { 
-        "name": 1, 
-        "comments": 1 
-      }},
-      { $limit : 10 }
-    ])
-Más comentarios
+          db.social.aggregate([
+            { $unwind : "$comments" },
+            {"$group" : {
+              _id:{name:"$comments.by.name"}, 
+              comments:{$sum:1}
+            }},
+            { "$sort": { 
+              "name": 1, 
+              "comments": 1 
+            }},
+            { $limit : 10 }
+          ])
+          
+    - Más comentarios
 
-    db.social.aggregate([
-      { $unwind : "$comments" },
-      {"$group" : {
-        _id:{name:"$comments.by.name"}, 
-        comments:{$sum:1}
-      }},
-      { "$sort": { 
-        "name": 1, 
-        "comments": -1 
-      }},
-      { $group : 
-        {
-          _id:null, name_max:{$first:"$_id"}, 
-          num_max:{$first:"$comments"}, 
-          name_min:{$last:"$_id"},
-          num_min:{$last:"$comments"} 
-        } 
-      }
-    ])
-    
+          db.social.aggregate([
+            { $unwind : "$comments" },
+            {"$group" : {
+              _id:{name:"$comments.by.name"}, 
+              comments:{$sum:1}
+            }},
+            { "$sort": { 
+              "name": 1, 
+              "comments": -1 
+            }},
+            { $group : 
+              {
+                _id:null, name_max:{$first:"$_id"}, 
+                num_max:{$first:"$comments"}, 
+                name_min:{$last:"$_id"},
+                num_min:{$last:"$comments"} 
+              } 
+            }
+          ])
+
 - Crear funcion de paginacion para mostrar los mensajes correspondientes a la pagina que le indiquemos segun los documentos por pagina que nosotros le indiquemos
 
       let paginar=(np,nxp)=>{
