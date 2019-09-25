@@ -43,3 +43,14 @@ Más comentarios
         } 
       }
     ])
+    
+- Crear funcion de paginacion para mostrar los mensajes correspondientes a la pagina que le indiquemos segun los documentos por pagina que nosotros le indiquemos
+
+      let paginar=(np,nxp)=>{
+        let docs=db.social.find().sort( { index: 1 } ).skip((np-1)*nxp).limit(nxp);
+        docs.forEach((miDoc)=>{print(`titulo:${miDoc._id}| Indice:${miDoc.index}`)})
+      }
+      paginar(3,10);
+        
+     <sub><sup>*nota: np = numero de pagina || nxp = numero por pagina*</sub></sup>
+
